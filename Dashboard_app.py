@@ -8,7 +8,7 @@ import plotly.express as px
 # -----------------------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv('train.csv')
+    df = pd.read_csv('./data/train.csv')
     df['Order Date'] = pd.to_datetime(
         df['Order Date'],
         errors='coerce',
@@ -52,7 +52,7 @@ df_filtered = df[
 ]
 
 # -----------------------------
-# KPI Section (Improved Design)
+# KPI Section
 # -----------------------------
 st.markdown("## 📊 Business KPIs")
 
@@ -73,7 +73,7 @@ with col4:
 st.markdown("---")
 
 # -----------------------------
-# Sales & Profit Trend (NEW)
+# Sales & Profit Trend
 # -----------------------------
 trend = (
     df_filtered.groupby("YearMonth")[["Sales", "Profit"]]
@@ -102,6 +102,41 @@ st.plotly_chart(fig_sales_cat, use_container_width=True)
 sales_region = df_filtered.groupby("Region")["Sales"].sum().reset_index()
 fig_sales_reg = px.bar(sales_region, x="Region", y="Sales", title="🌍 Sales by Region")
 st.plotly_chart(fig_sales_reg, use_container_width=True)
+
+# -----------------------------
+# Sales & Profit Share by Customer Segment 
+# -----------------------------
+if "Segment" in df_filtered.columns:
+    seg_group = df_filtered.groupby("Segment").agg(
+        Sales=("Sales", "sum"),
+        Profit=("Profit", "sum")
+    ).reset_index()
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        fig_sales_pie = px.pie(
+            seg_group,
+            names="Segment",
+            values="Sales",
+            hole=0.4,
+            color_discrete_sequence=px.colors.qualitative.Set3,
+            title="🥧 Sales Share by Segment"
+        )
+        st.plotly_chart(fig_sales_pie, use_container_width=True)
+
+    with col2:
+        fig_profit_pie = px.pie(
+            seg_group,
+            names="Segment",
+            values="Profit",
+            hole=0.4,
+            color_discrete_sequence=px.colors.qualitative.Set2,
+            title="💹 Profit Share by Segment"
+        )
+        st.plotly_chart(fig_profit_pie, use_container_width=True)
+else:
+    st.warning("⚠️ No 'Segment' column found in dataset.")
 
 # -----------------------------
 # Top Products
@@ -139,4 +174,5 @@ fig_pareto = px.line(customer_sales, x=customer_sales.index, y="Cumulative %",
 fig_pareto.add_bar(x=customer_sales.index, y=customer_sales["Sales"], name="Customer Sales")
 
 st.plotly_chart(fig_pareto, use_container_width=True)
+
 
