@@ -8,7 +8,7 @@ import plotly.express as px
 # -----------------------------
 @st.cache_data
 def load_data():
-    df = pd.read_csv('./data/train.csv')
+    df = pd.read_csv('train.csv')
     df['Order Date'] = pd.to_datetime(
         df['Order Date'],
         errors='coerce',
