@@ -63,3 +63,24 @@ pip install -r requirements.txt
 
 # Run the app
 streamlit run app.py
+```
+
+---
+
+## 📈 Future Enhancements
+
+- Add a forecasting module for sales prediction  
+- Include drill-down filters (e.g., sub-category level)  
+- Enhance data export functionality (download reports and filtered datasets)  
+- Integrate real-time data sources (SQL/Cloud databases)  
+- Add user authentication and role-based dashboards  
+- Build a Dockerized version for easier deployment  
+
+---
+
+## 🎯 Use Cases
+
+- **Business Performance Monitoring**: Quickly track sales and profit KPIs across regions and categories  
+- **Sales Reporting**: Generate insights for executives and stakeholders in a visual, interactive format  
+- **Customer & Product Analysis**: Identify high-value customers and top-performing products for targeted strategies  
+- **Data Storytelling**: Present insights interactively to improve decision-making and strategy discussions  
