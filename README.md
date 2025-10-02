@@ -84,3 +84,7 @@ streamlit run app.py
 - **Sales Reporting**: Generate insights for executives and stakeholders in a visual, interactive format  
 - **Customer & Product Analysis**: Identify high-value customers and top-performing products for targeted strategies  
 - **Data Storytelling**: Present insights interactively to improve decision-making and strategy discussions  
+
+---
+
+🔥 This project demonstrates data visualization, business analytics, and interactive dashboarding skills, highly relevant for roles in Data Science, Analytics, and Business Intelligence (BI).
